@@ -1,0 +1,23 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+    access_control:
+        - { path: '^/api', roles: ROLE_USER }
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: lazy
+            json_login:
+                check_path: login
+                username_path: username
+                password_path: password
+            logout:
+                path: logout

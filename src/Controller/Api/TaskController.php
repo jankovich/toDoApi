@@ -2,7 +2,6 @@
 
 namespace App\Controller\Api;
 
-use App\Entity\Task;
 use App\Repository\TaskRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +23,8 @@ class TaskController
     public function getList(): JsonResponse
     {
         $tasks = $this->taskRepository->findAll();
+
+        $json =[];
 
         foreach ($tasks as $task) {
             $json[] = $task->getAsArray();
